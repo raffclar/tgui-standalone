@@ -1,0 +1,20 @@
+.Window {
+  top: 120px !important;
+}
+
+.Window__rest, .TitleBar {
+  position: absolute !important;
+}
+
+.StandaloneControls {
+  background-color: #0aafa8;
+  flex: 1;
+}
+
+.StandaloneContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/*# sourceMappingURL=javascript.bundle.css.map*/

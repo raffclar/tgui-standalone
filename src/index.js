@@ -100,7 +100,7 @@ const MsgEditor = (props, context) => {
         <LabeledList.Item label="Selected Interface">
           <Dropdown
             overflow-y="scroll"
-            width="10%"
+            width="200px"
             selected={selectedInterface}
             options={interfaces}
             onSelected={changeInterface}

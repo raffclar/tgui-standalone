@@ -693,7 +693,34 @@ var defaultInitialState = {
   type: "update",
   payload: {
     config: {
-      interface: "AbductorConsole"
+      interface: "Apc"
+    },
+    data: {
+      isOperating: true,
+      siliconUser: false,
+      externalPower: 2,
+      chargingStatus: 2,
+      chargeMode: true,
+      powerCellStatus: 100,
+      failTime: 0,
+      powerChannels: [{
+        title: "Lights",
+        status: 2,
+        powerLoad: "10 W"
+      }, {
+        title: "Equipment",
+        status: 2,
+        powerLoad: "144 W"
+      }],
+      totalLoad: "154 W",
+      malfStatus: {
+        icon: "",
+        content: "cccc",
+        action: "mockAction"
+      },
+      coverLocked: true,
+      emergencyLights: false,
+      nightshiftLights: false
     }
   }
 };
@@ -736,6 +763,7 @@ var MsgEditor = function MsgEditor(props, context) {
   var selectedInterface = (_store$getState$backe = store.getState().backend.config) === null || _store$getState$backe === void 0 ? void 0 : _store$getState$backe.interface;
   return (0,inferno__WEBPACK_IMPORTED_MODULE_0__.createComponentVNode)(2, _packages_tgui_components__WEBPACK_IMPORTED_MODULE_216__.Section, {
     "title": "Dispatch TGUI state updates",
+    "className": "StandaloneControls",
     "buttons": (0,inferno__WEBPACK_IMPORTED_MODULE_0__.createComponentVNode)(2, _packages_tgui_components__WEBPACK_IMPORTED_MODULE_216__.Box, {
       "inline": true,
       "width": "100%",
@@ -748,8 +776,7 @@ var MsgEditor = function MsgEditor(props, context) {
     }),
     children: [(0,inferno__WEBPACK_IMPORTED_MODULE_0__.createComponentVNode)(2, _packages_tgui_components__WEBPACK_IMPORTED_MODULE_216__.Box, {
       "as": "textarea",
-      "width": "100%",
-      "height": "4rem",
+      "className": "StandaloneEditor",
       "onChange": function () {
         function onChange(e) {
           return setCode(e.target.value);
@@ -757,13 +784,19 @@ var MsgEditor = function MsgEditor(props, context) {
 
         return onChange;
       }(),
+      "spellcheck": false,
       children: code
+    }), (0,inferno__WEBPACK_IMPORTED_MODULE_0__.createVNode)(1, "pre", null, (0,inferno__WEBPACK_IMPORTED_MODULE_0__.createVNode)(1, "code", "language-html", null, 1, {
+      "id": "highlighting-content"
+    }), 2, {
+      "id": "highlighting",
+      "aria-hidden": "true"
     }), (0,inferno__WEBPACK_IMPORTED_MODULE_0__.createComponentVNode)(2, _packages_tgui_components__WEBPACK_IMPORTED_MODULE_216__.LabeledList, {
       children: (0,inferno__WEBPACK_IMPORTED_MODULE_0__.createComponentVNode)(2, _packages_tgui_components__WEBPACK_IMPORTED_MODULE_216__.LabeledList.Item, {
         "label": "Selected Interface",
         children: (0,inferno__WEBPACK_IMPORTED_MODULE_0__.createComponentVNode)(2, _packages_tgui_components__WEBPACK_IMPORTED_MODULE_216__.Dropdown, {
           "overflow-y": "scroll",
-          "width": "10%",
+          "width": "200px",
           "selected": selectedInterface,
           "options": interfaces,
           "onSelected": changeInterface

@@ -43,7 +43,37 @@ const defaultInitialState = {
   type: "update",
   payload: {
     config: {
-      interface: "AbductorConsole",
+      interface: "Apc",
+    },
+    data: {
+      isOperating: true,
+      siliconUser: false,
+      externalPower: 2,
+      chargingStatus: 2,
+      chargeMode: true,
+      powerCellStatus: 100,
+      failTime: 0,
+      powerChannels: [
+        {
+          title: "Lights",
+          status: 2,
+          powerLoad: "10 W"
+        },
+        {
+          title: "Equipment",
+          status: 2,
+          powerLoad: "144 W"
+        }
+      ],
+      totalLoad: "154 W",
+      malfStatus: {
+        icon: "",
+        content: "cccc",
+        action: "mockAction"
+      },
+      coverLocked: true,
+      emergencyLights: false,
+      nightshiftLights: false,
     }
   }
 };
@@ -79,6 +109,7 @@ const MsgEditor = (props, context) => {
   return (
     <Section
       title="Dispatch TGUI state updates"
+      className="StandaloneControls"
       buttons={(
         <Box inline width="100%">
           <Button
@@ -91,11 +122,15 @@ const MsgEditor = (props, context) => {
       )}>
       <Box
         as="textarea"
-        width="100%"
-        height="4rem"
-        onChange={e => setCode(e.target.value)}>
+        className="StandaloneEditor"
+        onChange={e => setCode(e.target.value)}
+        spellcheck={false}
+      >
         {code}
       </Box>
+      <pre id="highlighting" aria-hidden="true">
+        <code class="language-html" id="highlighting-content" />
+      </pre>
       <LabeledList>
         <LabeledList.Item label="Selected Interface">
           <Dropdown
